@@ -1,0 +1,9 @@
+<select name="{{name}}" id="{{ name }}" size="{{ size }}" >
+    {% for key, objet in tbObjets %}
+        {% if objet.identifiant != idSelect %}
+            <option value="{{ objet.identifiant }}">{{ objet.libelle }}</option>
+        {% else %}
+           <option selected value="{{ objet.identifiant }}">{{ objet.libelle }}</option>
+        {% endif %}
+    {% endfor %}
+</select>
