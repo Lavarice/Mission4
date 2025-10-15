@@ -1,4 +1,4 @@
-{% extends "layout.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block central %}
 <div class="col-sm-8">
@@ -24,7 +24,7 @@
         <tbody>
           <!-- Nouveau jeu -->
           <tr>
-            <form action="index.php?uc=gererJeuxVideo" method="post">
+            <form action="{{ path('jeuxvideo_ajouter') }}" method="post">
               <td>Nouveau</td>
               <td><input type="text" name="txtNom" required></td>
               <td><input type="number" name="txtPrix" required min="0" step="0.01"></td>
@@ -54,7 +54,7 @@
 
           {% for jeu in tbJeux %}
           <tr>
-            <form action="index.php?uc=gererJeuxVideo" method="post">
+            <form method="post">
               <td>{{ jeu.identifiant }}<input type="hidden" name="txtIdJeux" value="{{ jeu.identifiant }}"></td>
               
               {% if jeu.identifiant != idJeuxModif %}
@@ -69,8 +69,8 @@
                   {% if notification != 'rien' and jeu.identifiant == idJeuxNotif %}
                     <button class="btn btn-success btn-xs"><i class="fa fa-check"></i> {{ notification }}</button>
                   {% endif %}
-                  <button class="btn btn-primary btn-xs" type="submit" name="cmdAction" value="demanderModifierJeux" title="Modifier"><i class="fa fa-pencil"></i></button>
-                  <button class="btn btn-danger btn-xs" type="submit" name="cmdAction" value="supprimerJeu" title="Supprimer" onclick="return confirm('Voulez-vous vraiment supprimer ce jeu ?');"><i class="fa fa-trash-o"></i></button>
+                  <button class="btn btn-primary btn-xs" type="submit" name="cmdAction" value="demanderModifierJeux" title="Modifier" formaction="{{ path('jeuxvideo_demandermodifier') }}" formmethod="post"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-danger btn-xs" type="submit" name="cmdAction" value="supprimerJeu" title="Supprimer" formaction="{{ path('jeuxvideo_supprimer') }}" formmethod="post" onclick="return confirm('Voulez-vous vraiment supprimer ce jeu ?');"><i class="fa fa-trash-o"></i></button>
                 </td>
               {% else %}
                 <td><input type="text" name="txtNom" value="{{ jeu.nom }}" required></td>
@@ -93,8 +93,8 @@
                   {{ include('liste.html.twig') }}
                 </td>
                 <td>
-                  <button class="btn btn-primary btn-xs" type="submit" name="cmdAction" value="validerModifierJeu" title="Enregistrer"><i class="fa fa-save"></i></button>
-                  <button class="btn btn-warning btn-xs" type="submit" name="cmdAction" value="annulerModifierJeu" title="Annuler"><i class="fa fa-undo"></i></button>
+                  <button class="btn btn-primary btn-xs" type="submit" name="cmdAction" value="validerModifierJeu" title="Enregistrer" formaction="{{ path('jeuxvideo_validermodifier') }}" formmethod="post"><i class="fa fa-save"></i></button>
+                  <button class="btn btn-warning btn-xs" type="submit" name="cmdAction" value="annulerModifierJeu" title="Annuler" formaction="{{ path('jeuxvideo_afficher') }}" formmethod="get"><i class="fa fa-undo"></i></button>
                 </td>
               {% endif %}
             </form>
