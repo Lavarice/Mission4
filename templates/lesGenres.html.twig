@@ -78,13 +78,12 @@ vraiment supprimer ce genre ?');"><i class="fa fa-trash-o "></i></button>
 required minlength="4" maxlength="24" value="{{ genre.libelle }}" />
  </td>
  <td>
- {% set tbObjets, name, size, idSelect = tbMembres, 'lstMembre', 
-1, genre.idSpecialiste %}
+{% set tbObjets, name, size = tbMembres, 'lstMembre', 1 %}
  {{ include('liste.html.twig') }}
  </td>
- <td>
+ {# <td>
  {{ genre.nbJeux }}
- </td>
+ </td> #}
 <td>
  <button class="btn btn-primary btn-xs" type="submit" 
 name="cmdAction" value="validerModifierGenre" title="Enregistrer" 
