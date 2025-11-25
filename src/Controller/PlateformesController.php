@@ -1,75 +1,84 @@
 <?php
-// src/Controller/PlateformesController.php
+
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-require_once 'modele/class.PdoJeux.inc.php';
-use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Plateformes;
+use App\Form\PlateformesType;
+use App\Repository\PlateformesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
-use PdoJeux;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
-class PlateformesController extends AbstractController
+#[Route('/plateformes')]
+final class PlateformesController extends AbstractController
 {
-    /**
-     * Affiche la liste des plateformes
-     */
-    private function afficherPlateformes(PdoJeux $db, int $idPlateformeModif, string $notification = '')
+    #[Route(name: 'app_plateformes_index', methods: ['GET'])]
+    public function index(PlateformesRepository $plateformesRepository): Response
     {
-        $tbPlateformes = $db->getLesPlateformes();
-        return $this->render('lesPlateformes.html.twig', [
-            'menuActif' => 'Jeux',
-            'tbPlateformes' => $tbPlateformes,
-            'idPlateformeModif' => $idPlateformeModif,
-            'notification' => $notification
+        return $this->render('plateformes/index.html.twig', [
+            'plateformes' => $plateformesRepository->findAll(),
         ]);
     }
 
-    #[Route('/plateformes', name: 'plateformes_afficher')]
-    public function index(SessionInterface $session)
+    #[Route('/new', name: 'app_plateformes_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if ($session->has('idUtilisateur')) {
-            $db = PdoJeux::getPdoJeux();
-            return $this->afficherPlateformes($db, -1);
-        } else {
-            return $this->render('connexion.html.twig');
+        $plateforme = new Plateformes();
+        $form = $this->createForm(PlateformesType::class, $plateforme);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($plateforme);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_plateformes_index', [], Response::HTTP_SEE_OTHER);
         }
+
+        return $this->render('plateformes/new.html.twig', [
+            'plateforme' => $plateforme,
+            'form' => $form,
+            'menuActif' => 'Jeux',
+        ]);
     }
 
-    #[Route('/plateformes/ajouter', name: 'plateformes_ajouter')]
-    public function ajouter(SessionInterface $session, Request $request)
+    #[Route('/{id}', name: 'app_plateformes_show', methods: ['GET'])]
+    public function show(Plateformes $plateforme): Response
     {
-        $db = PdoJeux::getPdoJeux();
-        $notification = '';
-        if (!empty($request->request->get('txtLibPlateforme'))) {
-            $db->ajouterPlateforme($request->request->get('txtLibPlateforme'));
-            $notification = 'Ajoutée';
+        return $this->render('plateformes/show.html.twig', [
+            'plateforme' => $plateforme,
+            'menuActif' => 'Jeux',
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_plateformes_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Plateformes $plateforme, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(PlateformesType::class, $plateforme);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_plateformes_index', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->afficherPlateformes($db, -1, $notification);
+
+        return $this->render('plateformes/edit.html.twig', [
+            'plateforme' => $plateforme,
+            'form' => $form,
+            'menuActif' => 'Jeux',
+        ]);
     }
 
-    #[Route('/plateformes/demandermodifier', name: 'plateformes_demandermodifier')]
-    public function demanderModifier(SessionInterface $session, Request $request)
+    #[Route('/{id}', name: 'app_plateformes_delete', methods: ['POST'])]
+    public function delete(Request $request, Plateformes $plateforme, EntityManagerInterface $entityManager): Response
     {
-        $db = PdoJeux::getPdoJeux();
-        return $this->afficherPlateformes($db, $request->request->get('txtIdPlateforme'));
-    }
+        if ($this->isCsrfTokenValid('delete'.$plateforme->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($plateforme);
+            $entityManager->flush();
+        }
 
-    #[Route('/plateformes/validermodifier', name: 'plateformes_validermodifier')]
-    public function validerModifier(SessionInterface $session, Request $request)
-    {
-        $db = PdoJeux::getPdoJeux();
-        $db->modifierPlateforme($request->request->get('txtIdPlateforme'), $request->request->get('txtLibPlateforme'));
-        return $this->afficherPlateformes($db, -1, 'Modifiée');
-    }
-
-    #[Route('/plateformes/supprimer', name: 'plateformes_supprimer')]
-    public function supprimer(SessionInterface $session, Request $request)
-    {
-        $db = PdoJeux::getPdoJeux();
-        $db->supprimerPlateforme($request->request->get('txtIdPlateforme'));
-        $this->addFlash('success', 'La plateforme a été supprimée');
-        return $this->afficherPlateformes($db, -1);
+        return $this->redirectToRoute('app_plateformes_index', [], Response::HTTP_SEE_OTHER);
     }
 }
