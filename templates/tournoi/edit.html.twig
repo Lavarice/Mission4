@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Tournoi{% endblock %}
+
+{% block body %}
+    <div class="col-sm-8">
+    <section class="panel">
+    <div class="chat-room-head">
+    <h3><i class="fa fa-angle-right"></i> Modifier un tournoi</h3>
+    </div>
+    <div class="panel-body">
+        {{ include('tournoi/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('app_tournoi_index') }}">Retour à la liste</a>
+    </div>
+    </section>
+    </div>
+{% endblock %}

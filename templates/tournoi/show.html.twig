@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournoi{% endblock %}
+
+{% block body %}
+    <div class="col-sm-8">
+    <section class="panel">
+    <div class="chat-room-head">
+    <h3><i class="fa fa-angle-right"></i> Détails Tournoi</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ tournoi.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ tournoi.nom }}</td>
+                </tr>
+                <tr>
+                    <th>DateDebut</th>
+                    <td>{{ tournoi.dateDebut ? tournoi.dateDebut|date('Y-m-d H:i') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>DateFin</th>
+                    <td>{{ tournoi.dateFin ? tournoi.dateFin|date('Y-m-d H:i') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>NbParticipants</th>
+                    <td>{{ tournoi.nbParticipants }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ tournoi.description }}</td>
+                </tr>
+                <tr>
+                    <th>Plateforme</th>
+                    <td>{{ tournoi.plateforme ? tournoi.plateforme.libPlateforme : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_tournoi_index') }}">Retour à la liste</a>
+        <a href="{{ path('app_tournoi_edit', {'id': tournoi.id}) }}">Modifier</a>
+    </div>
+    </section>
+    </div>
+{% endblock %}

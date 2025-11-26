@@ -11,8 +11,6 @@ final class TournoisController extends AbstractController
     #[Route('/tournois', name: 'app_tournois')]
     public function index(): Response
     {
-        return $this->render('tournois/index.html.twig', [
-            'controller_name' => 'TournoisController', 'menuActif' => 'Jeux',
-        ]);
+        return $this->redirectToRoute('app_tournoi_index');
     }
 }
