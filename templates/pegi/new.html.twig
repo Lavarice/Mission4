@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Pegi{% endblock %}
+
+{% block body %}
+    <div class="col-sm-8">
+    <section class="panel">
+    <div class="chat-room-head">
+    <h3><i class="fa fa-angle-right"></i> Ajouter un PEGI</h3>
+    </div>
+    <div class="panel-body">
+        {{ include('pegi/_form.html.twig') }}
+
+        <a href="{{ path('app_pegi_index') }}">Retour à la liste</a>
+    </div>
+    </section>
+    </div>
+{% endblock %}

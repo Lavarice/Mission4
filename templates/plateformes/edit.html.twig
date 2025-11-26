@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Plateformes{% endblock %}
+{% block title %}Edit Plateforme{% endblock %}
 
 {% block body %}
-    <h1>Edit Plateformes</h1>
+    <div class="col-sm-8">
+    <section class="panel">
+    <div class="chat-room-head">
+    <h3><i class="fa fa-angle-right"></i> Modifier une plateforme</h3>
+    </div>
+    <div class="panel-body">
+        {{ include('plateformes/_form.html.twig', {'button_label': 'Update'}) }}
 
-    {{ include('plateformes/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_plateformes_index') }}">back to list</a>
-
-    {{ include('plateformes/_delete_form.html.twig') }}
+        <a href="{{ path('app_plateformes_index') }}">Retour à la liste</a>
+    </div>
+    </section>
+    </div>
 {% endblock %}

@@ -74,7 +74,7 @@ final class PlateformesController extends AbstractController
     #[Route('/{id}', name: 'app_plateformes_delete', methods: ['POST'])]
     public function delete(Request $request, Plateformes $plateforme, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$plateforme->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$plateforme->getId(), $request->request->get('_token'))) {
             $entityManager->remove($plateforme);
             $entityManager->flush();
         }

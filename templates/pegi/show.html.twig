@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pegi{% endblock %}
+
+{% block body %}
+    <div class="col-sm-8">
+    <section class="panel">
+    <div class="chat-room-head">
+    <h3><i class="fa fa-angle-right"></i> Détails PEGI</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ pegi.id }}</td>
+                </tr>
+                <tr>
+                    <th>AgeLimite</th>
+                    <td>{{ pegi.ageLimite }}</td>
+                </tr>
+                <tr>
+                    <th>DescPegi</th>
+                    <td>{{ pegi.descPegi }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_pegi_index') }}">Retour à la liste</a>
+        <a href="{{ path('app_pegi_edit', {'id': pegi.id}) }}">Modifier</a>
+    </div>
+    </section>
+    </div>
+{% endblock %}
