@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plateformes{% endblock %}
+
+{% block body %}
+    <h1>Plateformes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ plateforme.id }}</td>
+            </tr>
+            <tr>
+                <th>LibPlateforme</th>
+                <td>{{ plateforme.libPlateforme }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plateformes_index') }}">back to list</a>
+
+    <a href="{{ path('app_plateformes_edit', {'id': plateforme.id}) }}">edit</a>
+
+    {{ include('plateformes/_delete_form.html.twig') }}
+{% endblock %}

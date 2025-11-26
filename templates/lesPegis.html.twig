@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+
+{% block central %}
+<div class="col-sm-8">
+   <section class="panel">
+      <div class="chat-room-head">
+         <h3><i class="fa fa-angle-right"></i> Gérer les PEGI</h3>
+      </div>
+      <div class="panel-body">
+         <table class="table table-striped table-advance table-hover">
+                 <thead>
+                     <tr class="tableau-entete">
+                        <th>Identifiant</th>
+                        <th>ageLimite</th>
+                        <th>descPegi</th>
+                        <th></th>
+                     </tr>
+                 </thead>
+         <tbody>
+            <tr>
+            <form action="{{ path('pegis_ajouter') }}" method="post">
+                <td>Nouveau</td>
+                <td>
+                    <input type="text" id="txtAgeLimite" name="txtAgeLimite" size="6" required minlength="1" maxlength="3" placeholder="age Limite" />
+                </td>
+                <td>
+                    <input type="text" id="txtDescPegi" name="txtDescPegi" size="60" placeholder="descPegi" />
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-xs" type="submit" title="Enregistrer nouveau"><i class="fa fa-save"></i></button>
+                </td>
+            </form>
+            </tr>
+
+         {% for key, p in tbPegis %}
+           <tr>
+            {% if p.identifiant != idPegiModif %}
+            <form action="{{ path('pegis_demandermodifier') }}" method="post" style="display:inline;">
+                <td>{{ p.identifiant }}<input type="hidden"  name="txtIdPegi" value="{{ p.identifiant }}" /></td>
+                <td>{{ p.ageLimite }}</td>
+                <td>{{ p.descPegi }}</td>
+                <td>
+                    <button class="btn btn-primary btn-xs" type="submit" title="Modifier"><i class="fa fa-pencil"></i></button>
+                </td>
+            </form>
+            <form action="{{ path('pegis_supprimer') }}" method="post" style="display:inline;">
+                <input type="hidden" name="txtIdPegi" value="{{ p.identifiant }}" />
+                <td style="display:none;"></td><td style="display:none;"></td>
+                <td>
+                    <button class="btn btn-danger btn-xs" type="submit" title="Supprimer" onclick="return confirm('Voulez-vous vraiment supprimer ce PEGI ?');"><i class="fa fa-trash-o "></i></button>
+                </td>
+            </form>
+            {% else %}
+            <form action="{{ path('pegis_validermodifier') }}" method="post">
+                <td>{{ p.identifiant }}<input type="hidden"  name="txtIdPegi" value="{{ p.identifiant }}" /></td>
+                <td><input type="text" id="txtAgeLimite" name="txtAgeLimite" size="6" required value="{{ p.ageLimite }}" /></td>
+                <td><input type="text" id="txtDescPegi" name="txtDescPegi" size="60" value="{{ p.descPegi }}" /></td>
+                <td>
+                    <button class="btn btn-primary btn-xs" type="submit" title="Enregistrer"><i class="fa fa-save"></i></button>
+                    <a class="btn btn-warning btn-xs" href="{{ path('pegis_afficher') }}" title="Annuler"><i class="fa fa-undo"></i></a>
+                </td>
+            </form>
+            {% endif %}
+           </tr>
+         {% endfor %}
+         </tbody>
+        </table>
+      </div>
+    </section>
+</div>
+{% endblock %}
