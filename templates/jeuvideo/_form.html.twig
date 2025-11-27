@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_widget(form) }}
+    </div>
+    <button class="btn btn-primary btn-xs" type="submit">
+        <i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}
+    </button>
+    <button class="btn btn-info btn-xs" type="reset">
+        <i class="fa fa-eraser"></i> Réinitialiser
+    </button>
+{{ form_end(form) }}

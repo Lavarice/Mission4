@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_jeuvideo_delete', {'refJeu': jeu.refJeu}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce jeu vidéo ?');" style="display:inline;">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ jeu.refJeu) }}">
+    <button class="btn btn-danger btn-xs" type="submit" title="Supprimer">
+        <i class="fa fa-trash-o"></i> Supprimer
+    </button>
+</form>

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau jeu vidéo{% endblock %}
+
+{% block central %}
+<div class="col-sm-12">
+    <section class="panel">
+        <div class="chat-room-head">
+            <h3><i class="fa fa-angle-right"></i> Créer un nouveau jeu vidéo</h3>
+        </div>
+        <div class="panel-body">
+            {{ include('jeuvideo/_form.html.twig', {'form': form}) }}
+
+            <div class="mt-3">
+                <a href="{{ path('app_jeuvideo_index') }}" class="btn btn-secondary btn-xs" title="Retour">
+                    <i class="fa fa-arrow-left"></i> Retour à la liste
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

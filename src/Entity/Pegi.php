@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PegiRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PegiRepository::class)]
@@ -13,11 +15,22 @@ class Pegi
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(name: 'age_limite', type: 'integer')]
     private ?int $ageLimite = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'desc_pegi', length: 255)]
     private ?string $descPegi = null;
+
+    /**
+     * @var Collection<int, JeuVideo>
+     */
+    #[ORM\OneToMany(targetEntity: JeuVideo::class, mappedBy: 'pegi')]
+    private Collection $jeux;
+
+    public function __construct()
+    {
+        $this->jeux = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,6 +57,35 @@ class Pegi
     public function setDescPegi(string $descPegi): static
     {
         $this->descPegi = $descPegi;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, JeuVideo>
+     */
+    public function getJeux(): Collection
+    {
+        return $this->jeux;
+    }
+
+    public function addJeu(JeuVideo $jeu): static
+    {
+        if (!$this->jeux->contains($jeu)) {
+            $this->jeux->add($jeu);
+            $jeu->setPegi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJeu(JeuVideo $jeu): static
+    {
+        if ($this->jeux->removeElement($jeu)) {
+            if ($jeu->getPegi() === $this) {
+                $jeu->setPegi(null);
+            }
+        }
 
         return $this;
     }
