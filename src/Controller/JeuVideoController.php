@@ -28,6 +28,7 @@ class JeuVideoController extends AbstractController
 
         return $this->render('jeuvideo/index.html.twig', [
             'jeux' => $jeux,
+            'menuActif' => 'Jeux',
         ]);
     }
 
@@ -46,6 +47,7 @@ class JeuVideoController extends AbstractController
 
         return $this->render('jeuvideo/new.html.twig', [
             'form' => $form,
+            'menuActif' => 'Jeux',
         ]);
     }
 
@@ -54,6 +56,7 @@ class JeuVideoController extends AbstractController
     {
         return $this->render('jeuvideo/show.html.twig', [
             'jeu' => $jeu,
+            'menuActif' => 'Jeux',
         ]);
     }
 
@@ -72,6 +75,7 @@ class JeuVideoController extends AbstractController
         return $this->render('jeuvideo/edit.html.twig', [
             'jeu' => $jeu,
             'form' => $form,
+            'menuActif' => 'Jeux',
         ]);
     }
 
