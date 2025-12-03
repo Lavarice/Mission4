@@ -16,6 +16,7 @@
             <tr class="tableau-entete">
             <th><i class="fa fa-bullhorn"></i> Identif</th>
             <th><i class="fa fa-bookmark"></i> Libellé</th>
+            <th><i class="fa fa-gamepad"></i> Jeux</th>
                 <th></th>
             </tr>
         </thead>
@@ -25,6 +26,15 @@
                 <td>{{ genre.id }}</td>
                 <td>{{ genre.libGenre }}</td>
                 <td>
+                    {% if genre.jeux is empty %}
+                        Aucun jeu
+                    {% else %}
+                        {% for jeu in genre.jeux %}
+                            <span class="badge bg-theme">{{ jeu.nom }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                <td>
                     <a href="{{path('app_genre_show',{'id': genre.id})}}"><button
                     class="btn btn-primary btn-xs"><i class="fa fa-tasks"></i></button></a>
                     <a href="{{path('app_genre_edit',{'id': genre.id})}}"><button
@@ -33,7 +43,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">aucun genre enregistré en base de données</td>
+                <td colspan="4">aucun genre enregistré en base de données</td>
             </tr>
         {% endfor %}
         </tbody>
