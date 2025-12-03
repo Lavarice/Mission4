@@ -20,8 +20,9 @@ class ParticipantType extends AbstractType
             ->add('email')
             ->add('tournois', EntityType::class, [
                 'class' => Tournoi::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
+                'by_reference' => false,
             ])
         ;
     }
