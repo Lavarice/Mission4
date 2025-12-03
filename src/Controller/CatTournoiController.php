@@ -18,6 +18,7 @@ class CatTournoiController extends AbstractController
     {
         return $this->render('cat_tournoi/index.html.twig', [
             'cat_tournois' => $catTournoiRepository->findAll(),
+            'menuActif' => 'Tournois',
         ]);
     }
 
@@ -37,6 +38,7 @@ class CatTournoiController extends AbstractController
         return $this->renderForm('cat_tournoi/new.html.twig', [
             'cat_tournoi' => $catTournoi,
             'form' => $form,
+            'menuActif' => 'Tournois',
         ]);
     }
 
@@ -45,6 +47,7 @@ class CatTournoiController extends AbstractController
     {
         return $this->render('cat_tournoi/show.html.twig', [
             'cat_tournoi' => $catTournoi,
+            'menuActif' => 'Tournois',
         ]);
     }
 
@@ -63,6 +66,7 @@ class CatTournoiController extends AbstractController
         return $this->renderForm('cat_tournoi/edit.html.twig', [
             'cat_tournoi' => $catTournoi,
             'form' => $form,
+            'menuActif' => 'Tournois',
         ]);
     }
 

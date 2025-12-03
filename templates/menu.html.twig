@@ -26,7 +26,18 @@ endif %}
  <li><a href="{{ path('app_plateformes_index') }}">Plateformes</a></li>
  <li><a href="{{ path('app_marque_index') }}">Marques</a></li>
  <li><a href="{{ path('app_pegi_index') }}">PEGI</a></li>
+ </ul>
+ </li>
+
+ <li class="sub-menu">
+ <a
+ {% if menuActif is defined and menuActif == 'Tournois' %} class="active" {% endif %}
+ href="javascript:;" ><i class="fa fa-users"></i>
+  <span>Tournois</span>
+ </a>
+ <ul class="sub">
  <li><a href="{{ path('app_tournoi_index') }}">Tournois</a></li>
+ <li><a href="{{ path('app_cat_tournoi_index') }}">Catégorie de tournois</a></li>
  </ul>
  </li>
  <li class="sub-menu">

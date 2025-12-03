@@ -19,7 +19,7 @@ class TournoiController extends AbstractController
     {
         return $this->render('tournoi/index.html.twig', [
             'tournois' => $tournoiRepository->findAll(),
-            'menuActif' => 'Jeux',
+            'menuActif' => 'Tournois',
         ]);
     }
 
@@ -40,7 +40,7 @@ class TournoiController extends AbstractController
         return $this->render('tournoi/new.html.twig', [
             'tournoi' => $tournoi,
             'form' => $form,
-            'menuActif' => 'Jeux',
+            'menuActif' => 'Tournois',
         ]);
     }
 
@@ -49,7 +49,7 @@ class TournoiController extends AbstractController
     {
         return $this->render('tournoi/show.html.twig', [
             'tournoi' => $tournoi,
-            'menuActif' => 'Jeux',
+            'menuActif' => 'Tournois',
         ]);
     }
 
@@ -68,7 +68,7 @@ class TournoiController extends AbstractController
         return $this->render('tournoi/edit.html.twig', [
             'tournoi' => $tournoi,
             'form' => $form,
-            'menuActif' => 'Jeux',
+            'menuActif' => 'Tournois',
         ]);
     }
 
