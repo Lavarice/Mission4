@@ -41,6 +41,14 @@ class TournoiType extends AbstractType
                 'label' => 'Catégorie de tournoi',
                 'required' => false,
             ])
+            ->add('participants', EntityType::class, [
+                'class' => \App\Entity\Participant::class,
+                'choice_label' => 'prenom', // Or a custom label like 'prenom' . ' ' . 'nom'
+                'label' => 'Participants',
+                'multiple' => true,
+                'expanded' => false, // Dropdown (true for checkboxes)
+                'required' => false,
+            ])
         ;
     }
 

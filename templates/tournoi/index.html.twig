@@ -16,6 +16,7 @@
             <th><i class="fa fa-bookmark"></i> Libelle</th>
             <th><i class="fa fa-calendar"></i> Date</th>
             <th><i class="fa fa-calendar"></i> Date de creation</th>
+            <th><i class="fa fa-users"></i> Participants</th>
                 <th></th>
             </tr>
         </thead>
@@ -25,7 +26,16 @@
                 <td>{{ tournoi.id }}</td>
                 <td>{{ tournoi.nom }}</td>
                 <td>{{ tournoi.dateDebut ? tournoi.dateDebut|date('Y-m-d') : '' }}</td>
-                <td>2025-11-01</td> {# Placeholder as per screenshot, or use a real field if exists #}
+                <td>2025-11-01</td> {# Placeholder #}
+                <td>
+                    {% if tournoi.participants is empty %}
+                        AUCUN
+                    {% else %}
+                        {% for participant in tournoi.participants %}
+                            <span class="badge bg-theme">{{ participant.prenom }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{path('app_tournoi_show',{'id': tournoi.id})}}"><button class="btn btn-primary btn-xs"><i class="fa fa-tasks"></i></button></a>
                     <a href="{{path('app_tournoi_edit',{'id': tournoi.id})}}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
@@ -34,7 +44,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">Aucun tournoi enregistré en base de données</td>
+                <td colspan="6">Aucun tournoi enregistré en base de données</td>
             </tr>
         {% endfor %}
         </tbody>
