@@ -15,6 +15,20 @@
                 <th>Nom</th>
                 <td>{{ cat_tournoi.nom }}</td>
             </tr>
+            <tr>
+                <th>Tournois associés</th>
+                <td>
+                    {% if cat_tournoi.tournois is empty %}
+                        Aucun tournoi
+                    {% else %}
+                        <ul>
+                        {% for tournoi in cat_tournoi.tournois %}
+                            <li>{{ tournoi.nom }} ({{ tournoi.dateDebut|date('d/m/Y') }})</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+            </tr>
         </tbody>
     </table>
 

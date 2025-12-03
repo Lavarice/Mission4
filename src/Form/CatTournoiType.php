@@ -17,6 +17,16 @@ class CatTournoiType extends AbstractType
                 'label' => 'Nom de la catégorie',
                 'attr' => ['class' => 'form-control']
             ])
+            ->add('tournois', \Symfony\Bridge\Doctrine\Form\Type\EntityType::class, [
+                'class' => \App\Entity\Tournoi::class,
+                'choice_label' => 'nom',
+                'label' => 'Tournois associés',
+                'multiple' => true,
+                'expanded' => false,
+                'required' => false,
+                'by_reference' => false, // Important for OneToMany inverse side
+                'attr' => ['class' => 'form-control']
+            ])
         ;
     }
 
