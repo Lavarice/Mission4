@@ -19,6 +19,7 @@ final class ParticipantController extends AbstractController
     {
         return $this->render('participant/index.html.twig', [
             'participants' => $participantRepository->findAll(),
+            'menuActif' => 'Tournois',
         ]);
     }
 
@@ -39,6 +40,7 @@ final class ParticipantController extends AbstractController
         return $this->render('participant/new.html.twig', [
             'participant' => $participant,
             'form' => $form,
+            'menuActif' => 'Tournois',
         ]);
     }
 
@@ -47,6 +49,7 @@ final class ParticipantController extends AbstractController
     {
         return $this->render('participant/show.html.twig', [
             'participant' => $participant,
+            'menuActif' => 'Tournois',
         ]);
     }
 
@@ -65,6 +68,7 @@ final class ParticipantController extends AbstractController
         return $this->render('participant/edit.html.twig', [
             'participant' => $participant,
             'form' => $form,
+            'menuActif' => 'Tournois',
         ]);
     }
 
