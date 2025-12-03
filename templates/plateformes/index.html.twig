@@ -14,6 +14,7 @@
             <tr class="tableau-entete">
             <th>Identifiant</th>
             <th>Libellé</th>
+            <th>Jeux</th>
                 <th></th>
             </tr>
         </thead>
@@ -23,6 +24,15 @@
                 <td>{{ plateforme.id }}</td>
                 <td>{{ plateforme.libPlateforme }}</td>
                 <td>
+                    {% if plateforme.jeux is empty %}
+                        Aucun jeu
+                    {% else %}
+                        {% for jeu in plateforme.jeux %}
+                            <span class="badge bg-theme">{{ jeu.nom }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                <td>
                     <a href="{{path('app_plateformes_show',{'id': plateforme.id})}}"><button class="btn btn-primary btn-xs"><i class="fa fa-tasks"></i></button></a>
                     <a href="{{path('app_plateformes_edit',{'id': plateforme.id})}}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
                     {{ include('plateformes/_delete_form.html.twig') }}
@@ -30,7 +40,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">aucune plateforme enregistrée en base de données</td>
+                <td colspan="4">aucune plateforme enregistrée en base de données</td>
             </tr>
         {% endfor %}
         </tbody>
