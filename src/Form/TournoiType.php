@@ -35,6 +35,12 @@ class TournoiType extends AbstractType
                 'class' => Plateformes::class,
                 'choice_label' => 'libPlateforme',
             ])
+            ->add('catTournoi', EntityType::class, [
+                'class' => \App\Entity\CatTournoi::class,
+                'choice_label' => 'nom',
+                'label' => 'Catégorie de tournoi',
+                'required' => false,
+            ])
         ;
     }
 

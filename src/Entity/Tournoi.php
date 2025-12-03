@@ -34,6 +34,10 @@ class Tournoi
     #[ORM\JoinColumn(nullable: false)]
     private ?Plateformes $plateforme = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tournois')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?CatTournoi $catTournoi = null;
+
     /**
      * @var Collection<int, Participant>
      */
@@ -118,6 +122,18 @@ class Tournoi
     public function setPlateforme(?Plateformes $plateforme): static
     {
         $this->plateforme = $plateforme;
+
+        return $this;
+    }
+
+    public function getCatTournoi(): ?CatTournoi
+    {
+        return $this->catTournoi;
+    }
+
+    public function setCatTournoi(?CatTournoi $catTournoi): static
+    {
+        $this->catTournoi = $catTournoi;
 
         return $this;
     }
