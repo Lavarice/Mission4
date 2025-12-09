@@ -1,3 +1,5 @@
+![Aperçu de l'application](agora_preview.png)
+
 # Projet Agora - MJC Libreville
 
 Ce projet est une application web développée pour la **MJC Agora** de Libreville par l'ESN **Logma**. Il s'agit d'une refonte complète de leur système d'information, passant d'un site statique/PHP natif à une application moderne basée sur le framework **Symfony**.
