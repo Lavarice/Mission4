@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Membre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,7 +24,11 @@ class MembreType extends AbstractType
                 'multiple' => true,
                 'label' => 'Rôles'
             ])
-            ->add('password')
+            ->add('plainPassword', PasswordType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Mot de passe (laisser vide pour ne pas changer)',
+            ])
             ->add('nomMembre')
             ->add('prenomMembre')
             ->add('telMembre')

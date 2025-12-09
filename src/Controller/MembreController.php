@@ -32,8 +32,10 @@ final class MembreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $passwordSaisi = $membre->getPassword();
-            $membre->setPassword($passwordHasher->hashPassword($membre, $passwordSaisi));
+            $plainPassword = $form->get('plainPassword')->getData();
+            if ($plainPassword) {
+                $membre->setPassword($passwordHasher->hashPassword($membre, $plainPassword));
+            }
             $entityManager->persist($membre);
             $entityManager->flush();
 
@@ -61,8 +63,10 @@ final class MembreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $passwordSaisi = $membre->getPassword();
-            $membre->setPassword($passwordHasher->hashPassword($membre, $passwordSaisi));
+            $plainPassword = $form->get('plainPassword')->getData();
+            if ($plainPassword) {
+                $membre->setPassword($passwordHasher->hashPassword($membre, $plainPassword));
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_membre_index', [], Response::HTTP_SEE_OTHER);
