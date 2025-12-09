@@ -14,8 +14,11 @@
 class="responsive">-->
  <img src="assets/img/greece-3348294_1280.jpg" alt="" class="responsive">
  <div id="blocImageTexte">
- Bonjour {{ app.session.get('prenomUtilisateur') }} {{ 
-app.session.get('nomUtilisateur') }}
+ {% if app.user %}
+ Bonjour {{ app.user.prenomMembre }} {{ app.user.nomMembre }}
+ {% else %}
+ Identifiez vous !
+ {% endif %}
  </div>
  </div>
 </div>

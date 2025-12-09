@@ -51,22 +51,20 @@ rel="stylesheet" />
  <div class="fa fa-bars tooltips" data-placement="right" data-originaltitle="Toggle Navigation"></div>
  </div>
  <!--logo start-->
- <a href="index.php" class="logo"><b>Ago<span>rA</span></b></a>
+ <a href="{{ path('accueil') }}" class="logo"><b>Ago<span>rA</span></b></a>
  <!--logo end-->
+ <div class="div class="top-menu">
  <ul class="nav pull-right top-menu">
- {# app.session.has() nouvelle syntaxe pour tester si une variable de 
-session existe #}
- {# app.session.get() nouvelle syntaxe pour récupérer la valeur d'une 
-variable de session #}
- {% if (app.session.has('idUtilisateur') ) %}
- <a href="" class="userAgo"> {{ app.session.get('prenomUtilisateur') }} {{ 
-app.session.get('nomUtilisateur') }}</a>
- <li><a class="logout" href="{{ path('deconnexion') }}">Se 
-déconnecter</a></li>
+ {# app.session.has() nouvelle syntaxe pour tester si une variable de session existe #}
+ {# app.session.get() nouvelle syntaxe pour récupérer la valeur d'une variable de session #}
+ {% if (app.user) %}
+ <a href="" class="userAgo"> {{ app.user.prenomMembre }} {{ app.user.nomMembre }}</a>
+ <li><a class="logout" href="{{ path('app_logout') }}">Déconnecter</a></li>
  {% else %}
- <li><a class="logout" href="{{ path('accueil') }}">Se connecter</a></li>
+ <li><a class="logout" href="{{ path('app_login') }}">Se connecter</a></li>
  {% endif %}
  </ul>
+ </div>
  </header>
  <!--header end-->
  <!--
@@ -77,7 +75,7 @@ déconnecter</a></li>
 **************************************************************************************
 ********************************************************************* -->
  {% block menu %}
- {% if (app.session.has('idUtilisateur') ) %}
+ {% if (app.user) %}
  {{ include('menu.html.twig') }}
  {% endif %}
  {% endblock %}
