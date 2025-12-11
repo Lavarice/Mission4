@@ -15,4 +15,20 @@ class TournoiRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Tournoi::class);
     }
+
+    /**
+     * @return Tournoi[]
+     */
+    public function findAllAfterThanDateSQL($datemax): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT * FROM tournoi t
+                WHERE t.date >= :datemax
+                ORDER BY t.date ASC';
+        $stmt = $conn->prepare($sql);
+        $resultat = $stmt->executeQuery(['datemax' => $datemax]);
+
+        return $resultat->fetchAllNumeric();
+    }
 }
