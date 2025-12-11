@@ -41,6 +41,27 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+            <h2>Nombre de participants par tournoi</h2>
+            <canvas id="chartParticipants" width="600" height="400"></canvas>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+            const ctx = document.getElementById('chartParticipants').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{% for t in stats %}'{{ t.libelle|e('js') }}',{% endfor %}],
+                    datasets: [{
+                        label: 'Nombre de participants',
+                        data: [{% for t in stats %}{{ t.nbParticipants }},{% endfor %}],
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+            });
+            </script>
         </div><!-- fin div panel-body-->
     </section><!-- fin section tournois-->
 </div><!--fin div col-sm-8-->
