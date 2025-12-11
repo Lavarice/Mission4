@@ -33,6 +33,7 @@ class TournoisSQLStatController extends AbstractController
             'stats' => $stats,
             'datemax' => $datemax,
             'mode' => 'SQL',
+            'menuActif' => 'Tournois',
         ]);
     }
 }
