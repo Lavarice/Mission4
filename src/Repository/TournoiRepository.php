@@ -31,4 +31,24 @@ class TournoiRepository extends ServiceEntityRepository
 
         return $resultat->fetchAllNumeric();
     }
+
+    /**
+     * @return Tournoi[]
+     */
+    public function findAllAfterThanDateDQL($datemax): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        // ce n'est pas du SQL mais du DQL : Doctrine Query Language
+        // il s'agit en fait d'une requête classique mais qui référence l'objet au lieu de la table
+        $query = $entityManager->createQuery(
+            'SELECT t
+            FROM App\Entity\Tournoi t
+            WHERE t.date >= :datemax
+            ORDER BY t.date ASC'
+        )->setParameter('datemax', $datemax);
+
+        // retourne un tableau d'objets de type Tournoi
+        return $query->getResult();
+    }
 }
