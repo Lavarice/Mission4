@@ -51,4 +51,20 @@ class TournoiRepository extends ServiceEntityRepository
         // retourne un tableau d'objets de type Tournoi
         return $query->getResult();
     }
+
+    /**
+     * @return Tournoi[]
+     */
+    public function findAllAfterThanDateQB($datemax): array
+    {
+        // ce n'est pas du SQL mais QueryBuilder
+        $qb = $this->createQueryBuilder('t')
+            ->where('t.dateDebut >= :datemax')
+            ->setParameter('datemax', $datemax)
+            ->orderBy('t.dateDebut', 'ASC');
+        $query = $qb->getQuery();
+
+        // retourne un tableau d'objets de type Tournoi
+        return $query->getResult();
+    }
 }
