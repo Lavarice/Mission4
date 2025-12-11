@@ -24,7 +24,7 @@ class TournoiDQLStatController extends AbstractController
         foreach ($tournois as $t) {
             $stats[] = [
                 'libelle' => $t->getNom(),
-                'categorie' => $t->getCatTournoi() ? $t->getCatTournoi()->getLibelle() : '(catégorie inconnue)',
+                'categorie' => $t->getCatTournoi() ? $t->getCatTournoi()->getNom() : '(catégorie inconnue)',
                 'date' => $t->getDateDebut() ? $t->getDateDebut()->format('Y-m-d') : '(pas de date)',
             ];
         }

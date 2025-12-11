@@ -28,7 +28,7 @@ class TournoiStatController extends AbstractController
         foreach ($tournois as $tournoi) {
             $stats[] = [
                 'libelle' => $tournoi->getNom(),
-                'categorie' => $tournoi->getCatTournoi() ? $tournoi->getCatTournoi()->getLibelle() : '(catégorie inconnue)',
+                'categorie' => $tournoi->getCatTournoi() ? $tournoi->getCatTournoi()->getNom() : '(catégorie inconnue)',
                 'nbParticipants' => count($tournoi->getParticipants()),
             ];
         }
