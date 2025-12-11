@@ -35,9 +35,9 @@ class CatTournoiController extends AbstractController
             return $this->redirectToRoute('app_cat_tournoi_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('cat_tournoi/new.html.twig', [
+        return $this->render('cat_tournoi/new.html.twig', [
             'cat_tournoi' => $catTournoi,
-            'form' => $form,
+            'form' => $form->createView(),
             'menuActif' => 'Tournois',
         ]);
     }
@@ -63,9 +63,9 @@ class CatTournoiController extends AbstractController
             return $this->redirectToRoute('app_cat_tournoi_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('cat_tournoi/edit.html.twig', [
+        return $this->render('cat_tournoi/edit.html.twig', [
             'cat_tournoi' => $catTournoi,
-            'form' => $form,
+            'form' => $form->createView(),
             'menuActif' => 'Tournois',
         ]);
     }
