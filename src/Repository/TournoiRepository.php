@@ -24,8 +24,8 @@ class TournoiRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = 'SELECT * FROM tournoi t
-                WHERE t.date >= :datemax
-                ORDER BY t.date ASC';
+                WHERE t.date_debut >= :datemax
+                ORDER BY t.date_debut ASC';
         $stmt = $conn->prepare($sql);
         $resultat = $stmt->executeQuery(['datemax' => $datemax]);
 
@@ -44,8 +44,8 @@ class TournoiRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT t
             FROM App\Entity\Tournoi t
-            WHERE t.date >= :datemax
-            ORDER BY t.date ASC'
+            WHERE t.dateDebut >= :datemax
+            ORDER BY t.dateDebut ASC'
         )->setParameter('datemax', $datemax);
 
         // retourne un tableau d'objets de type Tournoi
